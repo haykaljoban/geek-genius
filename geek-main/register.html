@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek Application</title>
+    <link rel="icon" href="./img/nobg.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          <!-- Tabs Titles -->
+          <a href="login.html"><h2 class="inactive underlineHover"> Sign In </h2></a>
+          <h2 class="active">Sign Up </h2>
+      
+          <!-- Icon -->
+          <div class="fadeIn first">
+            <img src="./img/nobg.svg" id="icon" alt="User Icon" />
+          </div>
+      
+          <!-- Login Form -->
+            <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+          <!-- <a href="index.html"><input type="submit" class="fadeIn fourth" value="Regist"></input></a> -->
+          <button type="button" onclick="register()" class="fadeIn fourth">register</button>
+      
+          <!-- Remind Passowrd -->
+          <div id="formFooter">
+            <a class="underlineHover" href="login.html">already have an account? login here</a>
+          </div>
+      
+        </div>
+    </div>
+
+    <script>
+      function register() {
+          const email = document.getElementById('login').value;
+          const password = document.getElementById('password').value;
+
+          // Buat objek payload untuk dikirim ke API
+          const data = {
+              email: email,
+              password: password
+          };
+
+          // Lakukan permintaan HTTP dengan Fetch API
+          fetch('https://pgexpress.up.railway.app/api/auth/register', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(result => {
+              // tambahkan logika notifikasi bila perlu
+          })
+          .catch(error => {
+              // Handle kesalahan jika terjadi
+              console.error('Error:', error);
+          });
+      }
+  </script>
+</body>
+</html>
